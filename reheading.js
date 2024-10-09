@@ -306,7 +306,7 @@ function getAllHeadings_(element) {
 
       // strip the line numbers if TOC contains line numbers
       var itemText = itemText.match(/(.*)\t/)[1];
-      if (itemText != realHeadings[ti]) {
+      if (itemText.trim() != realHeadings[ti]) {
         isUpToDate = false;
       }
       headingsMap.set(itemUrl, itemText);
@@ -336,7 +336,7 @@ function getRealHeadings_(element) {
     var par = searchResult.getElement().asParagraph();
     if (par.getHeading() == searchHeading.HEADING1 || par.getHeading() == searchHeading.HEADING2 || par.getHeading() == searchHeading.HEADING3
       || par.getHeading() == searchHeading.HEADING4 || par.getHeading() == searchHeading.HEADING5 || par.getHeading() == searchHeading.HEADING6) {
-      headings.push(par.getText());
+      headings.push(par.getText().trim());
     }
   }
   return headings;
