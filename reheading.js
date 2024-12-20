@@ -153,10 +153,11 @@ function replaceHeadingLinks() {
 
   links.forEach(function (link) {
 
-    if (link.url.startsWith('#heading')) {
+    var key = link.url.match(/\#heading\=(\S*)/)[1];
+    if (key) {
 
       // get the new heading text
-      var newHeadingText = headings.get(link.url);
+      var newHeadingText = headings.get(key);
 
       // if the link does not exist anymore, we cannot update it.
       if (typeof newHeadingText !== "undefined") {
@@ -309,7 +310,9 @@ function getAllHeadings_(element) {
       if (itemText.trim() != realHeadings[ti]) {
         isUpToDate = false;
       }
-      headingsMap.set(itemUrl, itemText);
+      var key = itemUrl.match(/\#heading\=(\S*)/)[1];
+      if(key)
+        headingsMap.set(key, itemText);
     }
   }
 
